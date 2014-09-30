@@ -17,9 +17,6 @@
   (concat abs-path relative-path)
 )
 
-(load (loe-expand-relative-path "plugins.el"));;加载插件设置文件
-(load (loe-expand-relative-path "thems.el"));;加载主题设置文件
-
 (defun loe-goto-line-or-recenter (&optional arg)
   "如果有参数就跳到arg所指定的行，否则只是调整调整页面，让光标居中、居顶、居底"
   (interactive "P")
@@ -29,3 +26,19 @@
    )
 )
 (global-set-key "\C-l" 'loe-goto-line-or-recenter)
+
+
+(defun loe-refresh-file ()
+  "刷新文件，如果buffer发生修改，就询问用户是否确定；否则直接刷新"
+  (interactive)
+  (revert-buffer t (not (buffer-modified-p)) t)
+)
+(global-set-key [(control f5)] 'loe-refresh-file)
+
+
+;;使用ibuffer替换默认的C-x C-b
+(require 'ibuffer)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+
+(load (loe-expand-relative-path "plugins.el"));;加载插件设置文件
+(load (loe-expand-relative-path "thems.el"));;加载主题设置文件
