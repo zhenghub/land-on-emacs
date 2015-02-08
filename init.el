@@ -3,6 +3,7 @@
 ;;org-mode
 (setq org-startup-indented t);;打开org-mode时自动启用org-indent-mode
 (global-set-key "\C-cl" 'org-store-link);;使用org-mode时在当前位置保存链接，这样就可以使用C-c C-l时使用保存的链接
+(setq org-todo-keywords '((sequence "TODO(t)" "STARTED(s!)" "HUANGUP(h)" "INTERRUPT(i!)" "|" "DONE(d!)" "CANCELD(c)" "FAIL(f!@)")))
 
 ;;common
 (global-linum-mode t);;显示行号列
@@ -27,6 +28,60 @@
 )
 (global-set-key "\C-l" 'loe-goto-line-or-recenter)
 
+(defun loe-not-empty-p (sequence)
+  "判断sequence是否为空"
+  (< 0 (length sequence))
+  )
+
+(defun loe-ensure-list (obj)
+  "如果obj不是list，就转成list"
+  (if (listp obj)
+      obj
+    (list obj)
+    )
+  )
+
+(defun loe-append-element (sequence ele)
+  "把ele添加到sequence的最后"
+  (if sequence
+      (nconc sequence (loe-ensure-list ele))
+    (list ele)
+    )
+  )
+
+(defun loe-list-subdirs (path &optional recursive)
+  "获取path-list下的所有子文件夹，如果recursive为non-nil，则会非递归按先序深度优先遍历的顺序递归查找子文件夹"
+  (if (file-directory-p path)
+      (if (not recursive)
+	  (let ((dir-list (list)))
+	    (dolist (subdir (directory-files path t) dir-list)
+	      (and (file-directory-p subdir);;判断是否文件夹
+		   (not (member (file-name-nondirectory subdir) '("." "..")))
+		   (setq dir-list (loe-append-element dir-list subdir)))))
+	(progn
+	  (let ((stack (loe-list-subdirs path)) result-list curpath)
+		(while (loe-not-empty-p stack)
+		  (setq curpath (pop stack))
+		  (setq result-list (loe-append-element result-list curpath))
+		  (setq stack (nconc (loe-list-subdirs curpath) stack))
+		  )
+		result-list
+		)
+	    ))))
+
+(defun loe-nconc-childlist (list)
+  (let (result)
+    (dolist (child list result)
+      (setq result (nconc result (loe-ensure-list child)))
+      )
+    )
+  )
+      
+(defun loe-include-subdirs (dir-list &optional recursive)
+  "把dir-list中每个文件夹的子目录也加入进来，如果recursive为non-nil，则递归遍历子文件夹"
+  (loe-nconc-childlist (mapcar (lambda (dir) (cons dir (loe-list-subdirs dir recursive)))
+	  dir-list
+	  )))
 
 (defun loe-refresh-file ()
   "刷新文件，如果buffer发生修改，就询问用户是否确定；否则直接刷新"
@@ -42,3 +97,9 @@
 
 (load (loe-expand-relative-path "plugins.el"));;加载插件设置文件
 (load (loe-expand-relative-path "thems.el"));;加载主题设置文件
+
+;;自动高亮配对的括号
+(show-paren-mode)
+
+
+

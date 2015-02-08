@@ -69,3 +69,8 @@
 (require 'auto-complete-config)
 (ac-config-default)
 
+(add-to-list 'load-path (loe-expand-plugin-abs-path "plantuml-mode"))
+;;(defvar 'plantuml-jar-path "E:/git/emacs-plugins/plantuml-mode/plantuml.jar")
+(require 'plantuml-mode)
+
+
