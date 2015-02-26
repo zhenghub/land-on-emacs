@@ -33,12 +33,12 @@
 ;;(require 'ecb-autoloads)
 
 ;;session.el
+;;可以记录历史文件
 (add-to-list 'load-path (loe-expand-plugin-abs-path "session"))
 (require 'session)
 (add-hook 'after-init-hook 'session-initialize)
 
-
-;;ipython
+;;ipython的emacs插件
 (setq python-shell-interpreter "python"
       python-shell-interpreter-args "-i D:\\program\\python27\\Scripts\\ipython2.exe"
       python-shell-prompt-regexp "In \\[[0-9]+\\]: .*"
@@ -50,7 +50,6 @@
 (message (concat "python-shell-prompt-regexp:" python-shell-prompt-regexp))
 (message "\\")
 
-
 ;;浏览kill-ring
 ;;(require 'browse-kill-ring)
 ;;(global-set-key [(control c)(k)] 'browse-kill-ring)
@@ -60,7 +59,7 @@
 (require 'browse-kill-ring+)
 
 ;;popup
-;;need by auto-complete
+;;needed by auto-complete
 (add-to-list 'load-path "e:/git/emacs-plugins/popup-el")
 (require 'popup)
 
@@ -69,6 +68,7 @@
 (require 'auto-complete-config)
 (ac-config-default)
 
+;;plantuml的emacs插件。plantuml是画uml图的工具
 (add-to-list 'load-path (loe-expand-plugin-abs-path "plantuml-mode"))
 ;;(defvar 'plantuml-jar-path "E:/git/emacs-plugins/plantuml-mode/plantuml.jar")
 (require 'plantuml-mode)
