@@ -60,7 +60,7 @@
   )
 
 (defun loe-list-subdirs (path &optional recursive)
-  "获取path-list下的所有子文件夹，如果recursive为non-nil，则会非递归按先序深度优先遍历的顺序递归查找子文件夹"
+  "获取path下的所有子文件夹，如果recursive为non-nil，则会非递归按先序深度优先遍历的顺序递归查找子文件夹"
   (if (file-directory-p path)
       (if (not recursive)
 	  (let ((dir-list (list)))
@@ -80,9 +80,10 @@
 	    ))))
 
 (defun loe-nconc-childlist (list)
+  "对list中的每个元素，确保是个list类型，并合并成一个总的list"
   (let (result)
-    (dolist (child list result)
-      (setq result (nconc result (loe-ensure-list child)))
+    (dolist (ele  list result)
+      (setq result (nconc result (loe-ensure-list ele)))
       )
     )
   )
@@ -116,11 +117,16 @@
   "最大化frame"
   (interactive)
   (cond ((loe-os-windows-p) (w32-send-sys-command #xf030))
-	((loe-os-linux-p) (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
-						 '(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0)))
+	((loe-os-linux-p) (progn (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
+						 '(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0))
+(x-send-client-message nil 0 nil "_NET_WM_STATE" 32
+						 '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0)
+)
 	)
 
   )
+)
+)
 
 ;;启动时最大化
 (if (loe-os-windows-p) (progn
@@ -128,7 +134,7 @@
 			    ;原因可能是并行的问题
 			    (loe-maximize-frame)
 					;(setq inhibit-startup-message t)
-			    (setq loe-initial-buffer-choice-b initial-buffer-choice)
+			    (setq loe-initial-buffer-choice-b initial-buffer-choice);备份initial-buffer-choice变量
 			    (setq initial-buffer-choice
 				  '(lambda () (let ((res (if loe-initial-buffer-choice-b loe-initial-buffer-choice-b (display-startup-screen))))
 						(loe-maximize-frame) res)))
@@ -136,3 +142,4 @@
 			    )
   (loe-maximize-frame)
   )
+

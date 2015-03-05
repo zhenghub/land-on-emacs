@@ -59,12 +59,12 @@
 (require 'browse-kill-ring+)
 
 ;;popup
-;;needed by auto-complete
-(add-to-list 'load-path "e:/git/emacs-plugins/popup-el")
+;;need by auto-complete
+(add-to-list 'load-path (loe-expand-plugin-abs-path "popup-el"))
 (require 'popup)
 
 ;;auto-complete
-(add-to-list 'load-path "e:/git/emacs-plugins/auto-complete")
+(add-to-list 'load-path (loe-expand-plugin-abs-path "auto-complete"))
 (require 'auto-complete-config)
 (ac-config-default)
 
