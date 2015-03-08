@@ -3,6 +3,10 @@
   (concat loe-plugin-dir plugin-dir-name)
 )
 
+;;使用ibuffer替换默认的C-x C-b
+(require 'ibuffer)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+
 ;;yasnippet
 ;;模板工具，可以通过输入一个缩写就扩展成函数模板，已经支持C,C++,C#,Perl,Python,Ruby,SQL,LaTex,HTML,CSS等等.
 (add-to-list 'load-path (loe-expand-plugin-abs-path "yasnippet"))

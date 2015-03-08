@@ -102,12 +102,8 @@
 (global-set-key [(control f5)] 'loe-refresh-file)
 
 
-;;使用ibuffer替换默认的C-x C-b
-(require 'ibuffer)
-(global-set-key (kbd "C-x C-b") 'ibuffer)
-
-(load (loe-expand-relative-path "plugins.el"));加载插件设置文件
-(load (loe-expand-relative-path "thems.el"));加载主题设置文件
+;(load (loe-expand-relative-path "plugins.el"));加载插件设置文件
+;(load (loe-expand-relative-path "thems.el"));加载主题设置文件
 
 ;;自动高亮配对的括号
 (show-paren-mode)
@@ -142,4 +138,25 @@
 			    )
   (loe-maximize-frame)
   )
+
+;; Set the el-get root directory to be loe-plugin-dir.
+;; If loe-plugin-dir is not set, use the default value of el-get-dir as value.
+(if loe-plugin-dir
+(setq el-get-dir (file-name-as-directory loe-plugin-dir)))
+
+(add-to-list 'load-path (file-name-as-directory (concat loe-plugin-dir "el-get")))
+
+(unless (require 'el-get nil 'noerror)
+  (with-current-buffer
+      (url-retrieve-synchronously
+       "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
+    (goto-char (point-max))
+    (eval-print-last-sexp)))
+
+(setq loe-plugin-dir el-get-dir)
+
+(add-to-list 'el-get-recipe-path (file-name-as-directory (concat loe-plugin-dir "el-get-user/recipes")))
+
+(el-get-bundle org-mode)
+(el-get 'sync)
 

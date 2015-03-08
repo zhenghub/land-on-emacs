@@ -1,5 +1,11 @@
 helloworld_2014/8/9
-
-* confs
+* INTRODUCTION
+I want a customized swiss knife.
+* INSTALL
+** DEPENCIES 
+* SETUP
+1. Set the add-ons root directory.
+* USAGE
+* CONF
 * plugins
 * 
