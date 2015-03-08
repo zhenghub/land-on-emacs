@@ -87,7 +87,7 @@
       )
     )
   )
-      
+
 (defun loe-include-subdirs (dir-list &optional recursive)
   "把dir-list中每个文件夹的子目录也加入进来，如果recursive为non-nil，则递归遍历子文件夹"
   (loe-nconc-childlist (mapcar (lambda (dir) (cons dir (loe-list-subdirs dir recursive)))
@@ -158,5 +158,6 @@
 (add-to-list 'el-get-recipe-path (file-name-as-directory (concat loe-plugin-dir "el-get-user/recipes")))
 
 (el-get-bundle org-mode)
-(el-get 'sync)
+(el-get-bundle 'magit)
 
+(el-get 'sync)
