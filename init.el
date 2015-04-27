@@ -3,7 +3,7 @@
 ;;org-mode
 (setq org-startup-indented t);打开org-mode时自动启用org-indent-mode
 (global-set-key "\C-cl" 'org-store-link);使用org-mode时在当前位置保存链接，这样就可以使用C-c C-l时使用保存的链接
-(setq org-todo-keywords '((sequence "TODO(t)" "STARTED(s!)" "HUANGUP(h)" "INTERRUPT(i!)" "|" "DONE(d!)" "CANCELD(c)" "FAIL(f!@)")))
+(setq org-todo-keywords '((sequence "TODO(t)" "BACKLOG(b)" "STARTED(s!)" "HUANGUP(h)" "INTERRUPT(i!)" "|" "DONE(d!)" "CANCELD(c)" "FAIL(f!@)")))
 
 ;;common
 (global-linum-mode t);显示行号列
@@ -157,7 +157,22 @@
 
 (add-to-list 'el-get-recipe-path (file-name-as-directory (concat loe-plugin-dir "el-get-user/recipes")))
 
+(defun loe-expand-plugin-abs-path (plugin-dir-name)
+  "根据`loe-plugin-dir'扩展路径"
+  (concat loe-plugin-dir plugin-dir-name)
+)
+
 (el-get-bundle org-mode)
 (el-get-bundle 'magit)
-
+(el-get-bundle auto-complete)
+(el-get-bundle 'markdown-mode)
+(el-get-bundle 'markdown-preview-mode)
+(el-get-bundle 'popup)
+(el-get-bundle 'ecb)
+(el-get-bundle 'jdee)
+(el-get-bundle 'protobuf-mode)
+(el-get-bundle 'graphviz-dot-mode)
+(el-get-bundle 'plantuml-mode)
 (el-get 'sync)
+(org-babel-do-load-languages 'org-babel-load-languages '((emacs-lisp . t) (plantuml . t) (dot . t)))
+(setq org-plantuml-jar-path (loe-expand-plugin-abs-path "plantuml.jar"))

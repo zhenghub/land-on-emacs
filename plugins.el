@@ -1,8 +1,3 @@
-(defun loe-expand-plugin-abs-path (plugin-dir-name)
-  "根据`loe-plugin-dir'扩展路径"
-  (concat loe-plugin-dir plugin-dir-name)
-)
-
 ;;使用ibuffer替换默认的C-x C-b
 (require 'ibuffer)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
