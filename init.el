@@ -142,7 +142,11 @@
 ;; Set the el-get root directory to be loe-plugin-dir.
 ;; If loe-plugin-dir is not set, use the default value of el-get-dir as value.
 (if loe-plugin-dir
-(setq el-get-dir (file-name-as-directory loe-plugin-dir)))
+    (progn
+      (setq loe-plugin-dir (file-name-as-directory loe-plugin-dir))
+      (setq el-get-dir (file-name-as-directory loe-plugin-dir))
+      )
+  )
 
 (add-to-list 'load-path (file-name-as-directory (concat loe-plugin-dir "el-get")))
 
@@ -162,7 +166,7 @@
   (concat loe-plugin-dir plugin-dir-name)
 )
 
-(el-get-bundle org-mode)
+(el-get-bundle 'org-mode)
 (el-get-bundle 'magit)
 (el-get-bundle auto-complete)
 (el-get-bundle 'markdown-mode)
