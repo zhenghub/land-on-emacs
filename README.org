@@ -1,11 +1,8 @@
-helloworld_2014/8/9
-* INTRODUCTION
-I want a customized swiss knife.
-* INSTALL
-** DEPENCIES 
-* SETUP
-1. Set the add-ons root directory.
-* USAGE
-* CONF
-* plugins
-* 
+自己的emacs配置，使用spacemacs。
+* install
+1. 确认已经安装spacemacs
+2. 将目录下的.spacemacs链接到~/.spacemacs
+3. 将layers链接到~/.emacs.d/private目录下
+* tips
+将spacemacs的启动时自动检查更新关了，由于网络原因，导致启动太慢
+
