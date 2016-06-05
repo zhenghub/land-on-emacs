@@ -4,5 +4,9 @@
 2. 将目录下的.spacemacs链接到~/.spacemacs
 3. 将layers链接到~/.emacs.d/private目录下
 * tips
-将spacemacs的启动时自动检查更新关了，由于网络原因，导致启动太慢
+1. 将spacemacs的启动时自动检查更新关了，由于网络原因，导致启动太慢
+2. 需要导出org文件成html时，在org文件头加上
+   #+BEGIN_SRC 
+   #+SETUPFILE: /home/zh/git/land-on-emacs/org/style/common.org
+   #+END_SRC
 
