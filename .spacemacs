@@ -46,7 +46,9 @@ values."
      git
      html
      scala
-     ;; markdown
+     (if (equal system-type "darwin")
+         osx)
+     markdown
      org
      (shell :variables
             shell-default-height 30
@@ -327,8 +329,14 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-  (setq org-agenda-files '("~/git/private/gtd/tasks.org"))
-  )
+  (debug)
+  (message "load-file-name")
+  (message load-file-name)
+  (message "buffer-file-name")
+  (message buffer-file-name)
+  (load-file
+   (expand-file-name "org.el" (file-name-directory (or load-file-name buffer-file-name)))
+  ))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
