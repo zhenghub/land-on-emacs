@@ -30,32 +30,36 @@ values."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
-     ;; ----------------------------------------------------------------
-     ;; Example of useful layers you may want to use right away.
-     ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
-     ;; <M-m f e R> (Emacs style) to install them.
-     ;; ----------------------------------------------------------------
-     helm
-     ;; auto-completion
-     ;; better-defaults
-     emacs-lisp
-     clojure
+   (append
+    (if (equal system-type "darwin")
+        osx nil)
+    '(
+      ;; ----------------------------------------------------------------
+      ;; Example of useful layers you may want to use right away.
+      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
+      ;; <M-m f e R> (Emacs style) to install them.
+      ;; ----------------------------------------------------------------
+      helm
+      ;; auto-completion
+      ;; better-defaults
+      emacs-lisp
+      clojure
 
-     auto-completion
-     git
-     html
-     scala
-     ;; markdown
-     org
-     (shell :variables
-            shell-default-height 30
-            shell-default-position 'bottom)
-     markdown
-     ;; spell-checking
-     ;; syntax-checking
-     ;; version-control
-     )
+      auto-completion
+      git
+      html
+      scala
+      markdown
+      org
+      (shell :variables
+             shell-default-height 30
+             shell-default-position 'bottom)
+      markdown
+      ;; spell-checking
+      ;; syntax-checking
+      ;; version-control
+      )
+    )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
@@ -320,6 +324,8 @@ before packages are loaded. If you are unsure, you should try in setting them in
    ) 
   )
 
+(setq my/init-file-name load-file-name)
+
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
 This function is called at the very end of Spacemacs initialization after
@@ -327,7 +333,7 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-  (setq org-agenda-files '("~/git/private/gtd/tasks.org"))
+  (load-file (expand-file-name "org.el" (file-name-directory my/init-file-name)))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
