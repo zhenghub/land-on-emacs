@@ -122,24 +122,25 @@
 
 
 (setq org-directory my-project-root)
-(setq org-default-notes-file (my-file "refile.org"))
+(setq my-org-capture-file (my-file "gtd/refile.org"))
+(setq org-default-notes-file my-org-capture-file)
 
 
 ;; Capture templates for: TODO tasks, Notes, appointments, phone calls, meetings, and org-protocol
 (setq org-capture-templates
-      (quote (("t" "todo" entry (file (my-file "refile.org"))
+      (quote (("t" "todo" entry (file my-org-capture-file)
                "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
-              ("r" "respond" entry (file (my-file "refile.org"))
+              ("r" "respond" entry (file my-org-capture-file)
                "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
-              ("n" "note" entry (file (my-file "refile.org"))
+              ("n" "note" entry (file my-org-capture-file)
                "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
-              ("j" "Journal" entry (file+datetree (my-file "diary.org"))
+              ("j" "Journal" entry (file+datetree my-org-capture-file)
                "* %?\n%U\n" :clock-in t :clock-resume t)
-              ("w" "org-protocol" entry (file (my-file "refile.org"))
+              ("w" "org-protocol" entry (file my-org-capture-file)
                "* TODO Review %c\n%U\n" :immediate-finish t)
-              ("m" "Meeting" entry (file (my-file "refile.org"))
+              ("m" "Meeting" entry (file my-org-capture-file)
                "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
-              ("p" "Phone call" entry (file (my-file "refile.org"))
+              ("p" "Phone call" entry (file my-org-capture-file)
                "* PHONE %? :PHONE:\n%U" :clock-in t :clock-resume t)
-              ("h" "Habit" entry (file (my-file "refile.org"))
+              ("h" "Habit" entry (file my-org-capture-file)
                "* NEXT %?\n%U\n%a\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n"))))
