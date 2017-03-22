@@ -56,6 +56,8 @@ values."
              shell-default-position 'bottom)
       markdown
       ruby
+
+      python
       ;; spell-checking
       ;; syntax-checking
       ;; version-control
