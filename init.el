@@ -55,6 +55,7 @@ values."
              shell-default-height 30
              shell-default-position 'bottom)
       markdown
+      ruby
       ;; spell-checking
       ;; syntax-checking
       ;; version-control
@@ -287,44 +288,12 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-  (setq org-publish-project-alist
-        `(
-          ("org-notes"
-                :base-directory "~/git/private/notes/blogs"
-                :publishing-directory "~/document/blogs"
-                :base-extension "org"
-                :author "zhenghu"
-                :recursive t
-                :publishing-function org-html-publish-to-html
-                :auto-sitemap t
-                :sitemap-filename "index.org"
-                :sitemap-title "ZhengHu"
-                :sitemap-sort-files anti-chronologically
-                ;;:sitemap-function my-website-sitemap-function
-                :html-link-up "/"
-                :html-link-home "/"
-                :html-preamble "<p class=\"date\">Published: %d</p>"
-                ;;:html-postamble my-website-html-postamble
-           )
-          ("org-static"
-           :base-directory "~/git/private/notes/blogs"
-           :publishing-directory "~/document/blogs"
-           :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
-           :recursive t
-           :publishing-function org-publish-attachment
-           )
-          ("org-external"
-           :base-directory "~/git/land-on-emacs/org"
-           :publishing-directory "~/document/blogs"
-           :recursive t
-           :publishing-function org-publish-attachment
-           )
-          ("org" :components ("org-notes" "org-static" "org-external"))
-        )
-   ) 
   )
 
 (setq my/init-file-name load-file-name)
+(defun my/init-file-dir-file (file)
+  (expand-file-name file (file-name-directory my/init-file-name))
+  )
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
@@ -333,7 +302,8 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-  (load-file (expand-file-name "org.el" (file-name-directory my/init-file-name)))
+  (load-file (my/init-file-dir-file "args.el"))
+  (load-file (my/init-file-dir-file "org.el"))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
