@@ -17,6 +17,8 @@
 (global-set-key (kbd "<f9> h") 'bh/hide-other)
 (global-set-key (kbd "<f9> n") 'bh/toggle-next-task-display)
 
+(global-set-key (kbd "<f9> m") 'bh/clock-in-organization-task-as-default)
+
 (global-set-key (kbd "<f9> I") 'bh/punch-in)
 (global-set-key (kbd "<f9> O") 'bh/punch-out)
 
