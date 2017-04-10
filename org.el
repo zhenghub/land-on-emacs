@@ -72,7 +72,7 @@
 
 (setq org-todo-keywords
       (quote (
-              (sequence "TODO(t)" "NEXT(n!)" "BLOCKED(b@/!)" "INTERUPTED(i!)" "CONTINUED(c@/!)" "|" "DONE(d@/!)" "CANCELED(c@/!)" "FAILED(f@/!)")
+              (sequence "TODO(t)" "NEXT(n!)" "INPROGRESS(i@/!)" "BREAK(b!)" "|" "DONE(d@/!)" "CANCELED(c@/!)" "FAILED(f@/!)")
               (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)" "PHONE" "MEETING")
               )))
 
@@ -326,19 +326,6 @@ Switch projects and subprojects from NEXT back to TODO"
       parent-task)))
 
 
-(global-set-key (kbd "<f9> m") 'bh/clock-in-organization-task-as-default)
-(defun my/learn-punch-in (arg)
-  (interactive "p")
-  (message
-   (let*
-       ((v (equal major-mode 'org-agenda-mode))
-        (marker (org-get-at-bol 'org-hd-marker))
-        (tags (org-with-point-at marker (org-get-tags-at))))
-     (message "%s <---> %s" marker tags)
-     )
-   )
-  )
-
 (defun bh/punch-in (arg)
   "Start continuous clocking and set the default task to the
 selected task.  If no task is selected set the Organization task
@@ -391,10 +378,6 @@ as the default task."
           (when bh/keep-clock-running
             (bh/clock-in-default-task)))))))
 
-(progn
- (org-id-find my/organization-task-id 'marker)
- (message marker)
- )
 (defun bh/clock-in-organization-task-as-default ()
   (interactive)
   (org-with-point-at (org-id-find my/organization-task-id 'marker)
@@ -409,7 +392,6 @@ as the default task."
 
 (add-hook 'org-clock-out-hook 'bh/clock-out-maybe 'append)
 
-(require 'org-id)
 (defun bh/clock-in-task-by-id (id)
   "Clock in a task by id"
   (org-with-point-at (org-id-find id 'marker)
