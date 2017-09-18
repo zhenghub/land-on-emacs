@@ -1,5 +1,5 @@
 (defun my-file (path) (expand-file-name path my-project-root))
-(setq org-agenda-files (mapcar 'my-file '("gtd/tasks.org" "gtd/refile.org" "gtd/project" "gtd/project/workbench")))
+(setq org-agenda-files (mapcar 'my-file '("gtd/tasks.org" "gtd/remember.org" "gtd/refile.org" "gtd/project" "gtd/project/workbench"))) 
 
 (require 'org-habit)
 
