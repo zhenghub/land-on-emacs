@@ -1,8 +1,9 @@
 自己的emacs配置，使用spacemacs。
 * install
-1. 确认已经安装spacemacs
-2. 将目录下的.spacemacs链接到~/.spacemacs
-3. 将layers链接到~/.emacs.d/private目录下
+1. 复制config.el.template到config.el，并修改config.el
+2. 确认已经安装spacemacs
+3. 将目录下的.spacemacs链接到~/.spacemacs
+4. 将layers链接到~/.emacs.d/private目录下
 * tips
 1. 将spacemacs的启动时自动检查更新关了，由于网络原因，导致启动太慢
 2. 需要导出org文件成html时，在org文件头加上

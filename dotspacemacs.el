@@ -294,11 +294,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
   )
 
-(setq my/init-file-name "/Users/zh/git/land-on-emacs/init.el")
-(defun my/init-file-dir-file (file)
-  (expand-file-name file (file-name-directory my/init-file-name))
-  )
-
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
 This function is called at the very end of Spacemacs initialization after
