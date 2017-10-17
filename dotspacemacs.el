@@ -62,6 +62,7 @@ values."
       ;; syntax-checking
       ;; version-control
 
+      sql
       graphviz
       )
     )
