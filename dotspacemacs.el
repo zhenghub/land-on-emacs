@@ -32,8 +32,8 @@ values."
    dotspacemacs-configuration-layers
    (append
     (if (equal system-type "darwin")
-        osx nil)
-    '(
+        '(osx) nil)
+   '(
       ;; ----------------------------------------------------------------
       ;; Example of useful layers you may want to use right away.
       ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -65,7 +65,7 @@ values."
       sql
       graphviz
       )
-    )
+   )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
@@ -280,7 +280,7 @@ values."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers `relative'
+   dotspacemacs-line-numbers 'relative
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'evil
