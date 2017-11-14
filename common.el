@@ -45,3 +45,10 @@
       (expand-file-name "~/libs/plantuml/plantuml.jar"))
 
 (require 'ox-confluence)
+(require 'helm-bookmark)
+
+(defun loe/camel-region ()
+  (interactive)
+  )
+
+(spacemacs/set-leader-keys "<f2> t c" 'loe/camel-region)
