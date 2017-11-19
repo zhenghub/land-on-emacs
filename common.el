@@ -30,6 +30,10 @@
 
 (spacemacs/set-leader-keys "<f2> a l" 'assist-info/list-info-files)
 
+(add-to-list 'load-path "~/.spacemacs.d/packages")
+
+(require 'org-hexo)
+
 (org-babel-do-load-languages
  'org-babel-load-languages
  '(;; other Babel languages
@@ -43,6 +47,13 @@
    (plantuml . t)))
 (setq org-plantuml-jar-path
       (expand-file-name "~/libs/plantuml/plantuml.jar"))
+
+(defun loe-generate-image-p (lang code)
+  (not (or (equal "dot" lang) (equal "plantuml" lang)))
+  )
+
+
+(setq org-confirm-babel-evaluate 'loe-generate-image-p)
 
 (require 'ox-confluence)
 (require 'helm-bookmark)
