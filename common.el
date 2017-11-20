@@ -63,3 +63,5 @@
   )
 
 (spacemacs/set-leader-keys "<f2> t c" 'loe/camel-region)
+
+(require 'org-checklist)
