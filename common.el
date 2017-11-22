@@ -58,10 +58,27 @@
 (require 'ox-confluence)
 (require 'helm-bookmark)
 
+;; 默认的导出成ascii格式的每行的长度太短了
+(setq org-ascii-text-width 500)
+
+(defun assist-info/export-correspond-file ()
+    (interactive)
+    (let*
+        (
+         (correspond-file-name (concat (car assist-info/project-dir) (string-remove-suffix ".org" (string-remove-prefix (car assist-info/info-dir) buffer-file-name))))
+         (correspond-file-buffer-name (file-name-nondirectory correspond-file-name))
+                                        ;(newbuffer (generate-new-buffer newbuffer-name))
+         )
+      (org-export-to-file 'ascii correspond-file-name
+        nil nil nil nil '(:ascii-charset ascii))
+      )
+)
+
 (defun loe/camel-region ()
   (interactive)
   )
 
 (spacemacs/set-leader-keys "<f2> t c" 'loe/camel-region)
+(spacemacs/set-leader-keys "<f2> a e" 'assist-info/export-correspond-file)
 
 (require 'org-checklist)
