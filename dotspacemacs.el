@@ -43,6 +43,10 @@ values."
       ;; auto-completion
       ;; better-defaults
       emacs-lisp
+
+      (java :variables java-backend 'eclim
+            eclim-eclipse-dirs '("~/libs/eclipse")
+            eclim-executable "~/libs/eclim")
       clojure
 
       auto-completion
