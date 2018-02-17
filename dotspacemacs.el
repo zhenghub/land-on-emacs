@@ -60,6 +60,7 @@ values."
              shell-default-position 'bottom)
       markdown
       ruby
+      javascript
 
       python
       ;; spell-checking
