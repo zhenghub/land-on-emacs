@@ -12,7 +12,7 @@
   '(?H "Export as Hexo Markdown"
        ((?b "To temporary buffer"
 	    (lambda (a s v b) (org-hexo-export-as-hexo a s v)))
-	(?f "To file" (lambda (a s v b) (org-hexo-export-to-hexo a s v)))))
+        (?f "To file" (lambda (a s v b) (org-hexo-export-file-to-hexo a s v)))))
   :translate-alist '((table . org-hexo-export-table)
 		     (table-cell . org-hexo-export-table-cell)
 		     (table-row . org-hexo-export-table-row))
@@ -80,15 +80,22 @@ a communication channel."
 
 (setq org-hexo-repo-path (file-name-as-directory "~/tmp/blog/source/_posts/"))
 
-(defun org-hexo-export-file-to-hexo (file)
+(defun org-hexo-export-file-to-file (source-file dest-file)
   (interactive)
-  (let ((filename (file-name-base file)))
-    (find-file file)
+  (let ((filename (file-name-base source-file)))
+    (find-file source-file)
     (org-hexo-export-as-hexo)
-    (set-visited-file-name (concat org-hexo-repo-path filename ".md"))
+    (set-visited-file-name dest-file)
     (save-buffer)
     )
   )
+
+(defun org-hexo-export-file-to-hexo (source-file)
+  (interactive)
+  (let ((filename (file-name-base source-file)))
+    (org-hexo-export-file-to-file source-file (concat org-hexo-repo-path filename ".md")))
+  )
+
 
 (provide 'org-hexo)
 
