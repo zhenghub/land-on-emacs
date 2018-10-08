@@ -3,6 +3,9 @@
 1. 复制config.el.template到config.el，并修改config.el
 2. 确认已经安装spacemacs
 3. 将目录下的.spacemacs链接到~/.spacemacs
+   #+BEGIN_SRC shell
+   ln -s ~/git/land-on-emacs/init.el ~/.spacemacs
+   #+END_SRC
 4. 将layers链接到~/.emacs.d/private目录下
 * tips
 1. 将spacemacs的启动时自动检查更新关了，由于网络原因，导致启动太慢
